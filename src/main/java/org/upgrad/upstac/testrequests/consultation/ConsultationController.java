@@ -95,7 +95,9 @@ public class ConsultationController {
         // For reference check the method assignForLabTest() method from LabRequestController class
         try {
             // replace this line of code with your implementation
-            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
+            User loggedInUser = userLoggedInService.getLoggedInUser();
+            TestRequest testRequest = testRequestUpdateService.assignForConsultation(id, loggedInUser);
+            return testRequest;
 
         }catch (AppException e) {
             throw asBadRequest(e.getMessage());
@@ -118,8 +120,9 @@ public class ConsultationController {
 
         try {
             // replace this line of code with your implementation
-            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,"Not implemented");
-
+            User loggedInUser = userLoggedInService.getLoggedInUser();
+            TestRequest testRequest = testRequestUpdateService.updateConsultation(id, testResult,loggedInUser);
+            return  testRequest;
 
         } catch (ConstraintViolationException e) {
             throw asConstraintViolation(e);
